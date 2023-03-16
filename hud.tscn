@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6udfvo25frh7"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_1gtec"]
+[ext_resource type="Texture2D" uid="uid://bbg0fdc837r7r" path="res://assets/title.png" id="2_1lsb2"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_xebrv"]
+action = &"space_bar"
+
+[sub_resource type="Shortcut" id="Shortcut_ljp2g"]
+events = [SubResource("InputEventAction_xebrv")]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_1gtec")
+
+[node name="Score" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.5
+offset_right = 240.5
+offset_bottom = 178.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 128
+text = "Score: 0"
+
+[node name="Start" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -459.0
+offset_right = 158.0
+offset_bottom = -339.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_ljp2g")
+text = "Start"
+
+[node name="GameOver" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -162.0
+offset_right = 192.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "Game Over
+Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(957.875, 371.75)
+scale = Vector2(0.490865, 0.425663)
+texture = ExtResource("2_1lsb2")
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

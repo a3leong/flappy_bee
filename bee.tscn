@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://cuecoc6xa8d8l"]
+
+[ext_resource type="Script" path="res://bee.gd" id="1_ak5dv"]
+[ext_resource type="Texture2D" uid="uid://coajpecfue2eu" path="res://assets/bee.png" id="1_tsb8d"]
+[ext_resource type="Texture2D" uid="uid://bjbpvimc0yalw" path="res://assets/bee_dead.png" id="2_qvjyo"]
+[ext_resource type="Texture2D" uid="uid://bblucxa2ds4tl" path="res://assets/bee_flap.png" id="2_wu1th"]
+[ext_resource type="Texture2D" uid="uid://5kaxq6dye0lu" path="res://assets/bee_flap_1.png" id="3_isuid"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ceekt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qvjyo")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_isuid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wu1th")
+}],
+"loop": false,
+"name": &"flap",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tsb8d")
+}],
+"loop": true,
+"name": &"neutral",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ahxpt"]
+radius = 68.896
+height = 243.278
+
+[node name="bee" type="RigidBody2D"]
+position = Vector2(946, 553)
+gravity_scale = 3.0
+max_contacts_reported = 1
+contact_monitor = true
+linear_velocity = Vector2(0, 498.126)
+script = ExtResource("1_ak5dv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5.20001, 13.2)
+scale = Vector2(0.65, 0.65)
+sprite_frames = SubResource("SpriteFrames_ceekt")
+animation = &"flap"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.886, -1.12)
+rotation = 1.27933
+scale = Vector2(0.65, 0.65)
+shape = SubResource("CapsuleShape2D_ahxpt")
+disabled = true
+metadata/_edit_group_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

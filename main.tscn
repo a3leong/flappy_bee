@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://tse6vr3jtfxt"]
+
+[ext_resource type="PackedScene" uid="uid://cuecoc6xa8d8l" path="res://bee.tscn" id="1_1bjwo"]
+[ext_resource type="Script" path="res://main.gd" id="1_f5usl"]
+[ext_resource type="PackedScene" uid="uid://bm1kk5t8mck6u" path="res://flower_obstacle.tscn" id="2_4tkgu"]
+[ext_resource type="PackedScene" uid="uid://b6udfvo25frh7" path="res://hud.tscn" id="4_00qwk"]
+[ext_resource type="AudioStream" uid="uid://ce1wxpvsjor7s" path="res://assets/bgm_smaller.ogg" id="5_2onsk"]
+[ext_resource type="AudioStream" uid="uid://wf7d3uibrx7o" path="res://assets/score.wav" id="6_m8qq6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chdl0"]
+size = Vector2(123.105, 20)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_f5usl")
+flower_obstacle_scene = ExtResource("2_4tkgu")
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="FlowerSpawnPosition" type="Marker2D" parent="."]
+position = Vector2(2181, 540)
+
+[node name="FlowerSpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.690196, 0.92549, 0.937255, 1)
+
+[node name="bee" parent="." instance=ExtResource("1_1bjwo")]
+position = Vector2(579, 361)
+
+[node name="HUD" parent="." instance=ExtResource("4_00qwk")]
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2onsk")
+
+[node name="DeadSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_m8qq6")
+
+[node name="Deathzone" type="Area2D" parent="."]
+position = Vector2(152, -114)
+scale = Vector2(4.7872, 8.73702)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deathzone"]
+position = Vector2(168.783, 154.629)
+scale = Vector2(3.25419, 0.899082)
+shape = SubResource("RectangleShape2D_chdl0")
+
+[connection signal="timeout" from="FlowerSpawnTimer" to="." method="_on_flower_spawn_timer_timeout"]
+[connection signal="hit" from="bee" to="." method="_on_bee_hit"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[connection signal="body_entered" from="Deathzone" to="." method="_on_deathzone_body_entered"]

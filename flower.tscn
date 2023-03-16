@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://vyj5wsh6bl0l"]
+
+[ext_resource type="Texture2D" uid="uid://bs24bi3ly81mp" path="res://assets/flower.png" id="1_ct0qi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eh40x"]
+size = Vector2(83, 388)
+
+[node name="Flower" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ct0qi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 56)
+shape = SubResource("RectangleShape2D_eh40x")
