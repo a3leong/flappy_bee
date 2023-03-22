@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/bgm_smaller.ogg-b662b0c96f860880cfb66fcc66a12
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

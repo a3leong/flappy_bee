@@ -1,6 +1,6 @@
 extends Node
 
-@export var max_flower_offset = 150
+@export var max_flower_offset = 200
 @export var flower_obstacle_scene: PackedScene
 const flower_obstacle_emitter = preload("res://flower_obstacle.tscn")
 var score = 0
